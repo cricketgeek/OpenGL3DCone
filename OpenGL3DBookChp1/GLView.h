@@ -9,11 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <OpenGLES/EAGL.h>
 #import <QuartzCore/QuartzCore.h>
-#import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/ES1/glext.h>
+#import "IRenderingEngine.hpp"
 
 @interface GLView : UIView
+{
+@private
+    EAGLContext *_context;
+    IRenderingEngine *_renderingEngine;
+    float _timestamp;
+}
 
-@property EAGLContext *context;
+- (void)drawView:(CADisplayLink *)displayLink;
+- (void)didRotate:(NSNotification *)notification;
+
 
 @end

@@ -11,12 +11,11 @@
 		F1C81B4116BB5E9C0063EEE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C81B4016BB5E9C0063EEE9 /* Foundation.framework */; };
 		F1C81B4316BB5E9C0063EEE9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C81B4216BB5E9C0063EEE9 /* CoreGraphics.framework */; };
 		F1C81B4916BB5E9C0063EEE9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1C81B4716BB5E9C0063EEE9 /* InfoPlist.strings */; };
-		F1C81B4B16BB5E9C0063EEE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C81B4A16BB5E9C0063EEE9 /* main.m */; };
-		F1C81B4F16BB5E9C0063EEE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C81B4E16BB5E9C0063EEE9 /* AppDelegate.m */; };
+		F1C81B4B16BB5E9C0063EEE9 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1C81B4A16BB5E9C0063EEE9 /* main.mm */; };
+		F1C81B4F16BB5E9C0063EEE9 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1C81B4E16BB5E9C0063EEE9 /* AppDelegate.mm */; };
 		F1C81B5116BB5E9C0063EEE9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F1C81B5016BB5E9C0063EEE9 /* Default.png */; };
 		F1C81B5316BB5E9C0063EEE9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F1C81B5216BB5E9C0063EEE9 /* Default@2x.png */; };
 		F1C81B5516BB5E9C0063EEE9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F1C81B5416BB5E9C0063EEE9 /* Default-568h@2x.png */; };
-		F1C81B5816BB5E9C0063EEE9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C81B5716BB5E9C0063EEE9 /* ViewController.m */; };
 		F1C81B6616BB5EC90063EEE9 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1C81B6516BB5EC90063EEE9 /* GLView.mm */; };
 		F1C81B6816BB5EE30063EEE9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C81B6716BB5EE30063EEE9 /* OpenGLES.framework */; };
 		F1C81B6A16BB5FBF0063EEE9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C81B6916BB5FBF0063EEE9 /* QuartzCore.framework */; };
@@ -29,19 +28,18 @@
 		F1C81B4216BB5E9C0063EEE9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F1C81B4616BB5E9C0063EEE9 /* OpenGL3DBookChp1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenGL3DBookChp1-Info.plist"; sourceTree = "<group>"; };
 		F1C81B4816BB5E9C0063EEE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F1C81B4A16BB5E9C0063EEE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F1C81B4A16BB5E9C0063EEE9 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		F1C81B4C16BB5E9C0063EEE9 /* OpenGL3DBookChp1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenGL3DBookChp1-Prefix.pch"; sourceTree = "<group>"; };
 		F1C81B4D16BB5E9C0063EEE9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		F1C81B4E16BB5E9C0063EEE9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F1C81B4E16BB5E9C0063EEE9 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		F1C81B5016BB5E9C0063EEE9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F1C81B5216BB5E9C0063EEE9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		F1C81B5416BB5E9C0063EEE9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		F1C81B5616BB5E9C0063EEE9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F1C81B5716BB5E9C0063EEE9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F1C81B6416BB5EC90063EEE9 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		F1C81B6516BB5EC90063EEE9 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
 		F1C81B6716BB5EE30063EEE9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		F1C81B6916BB5FBF0063EEE9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F1C81B6B16BB715E0063EEE9 /* IRenderingEngine.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = IRenderingEngine.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +61,6 @@
 		F1C81B2F16BB5E9C0063EEE9 = {
 			isa = PBXGroup;
 			children = (
-				F1C81B6916BB5FBF0063EEE9 /* QuartzCore.framework */,
 				F1C81B4416BB5E9C0063EEE9 /* OpenGL3DBookChp1 */,
 				F1C81B3D16BB5E9C0063EEE9 /* Frameworks */,
 				F1C81B3B16BB5E9C0063EEE9 /* Products */,
@@ -81,6 +78,7 @@
 		F1C81B3D16BB5E9C0063EEE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F1C81B6916BB5FBF0063EEE9 /* QuartzCore.framework */,
 				F1C81B6716BB5EE30063EEE9 /* OpenGLES.framework */,
 				F1C81B3E16BB5E9C0063EEE9 /* UIKit.framework */,
 				F1C81B4016BB5E9C0063EEE9 /* Foundation.framework */,
@@ -93,12 +91,11 @@
 			isa = PBXGroup;
 			children = (
 				F1C81B4D16BB5E9C0063EEE9 /* AppDelegate.h */,
-				F1C81B4E16BB5E9C0063EEE9 /* AppDelegate.m */,
-				F1C81B5616BB5E9C0063EEE9 /* ViewController.h */,
-				F1C81B5716BB5E9C0063EEE9 /* ViewController.m */,
+				F1C81B4E16BB5E9C0063EEE9 /* AppDelegate.mm */,
 				F1C81B4516BB5E9C0063EEE9 /* Supporting Files */,
 				F1C81B6416BB5EC90063EEE9 /* GLView.h */,
 				F1C81B6516BB5EC90063EEE9 /* GLView.mm */,
+				F1C81B6B16BB715E0063EEE9 /* IRenderingEngine.hpp */,
 			);
 			path = OpenGL3DBookChp1;
 			sourceTree = "<group>";
@@ -108,7 +105,7 @@
 			children = (
 				F1C81B4616BB5E9C0063EEE9 /* OpenGL3DBookChp1-Info.plist */,
 				F1C81B4716BB5E9C0063EEE9 /* InfoPlist.strings */,
-				F1C81B4A16BB5E9C0063EEE9 /* main.m */,
+				F1C81B4A16BB5E9C0063EEE9 /* main.mm */,
 				F1C81B4C16BB5E9C0063EEE9 /* OpenGL3DBookChp1-Prefix.pch */,
 				F1C81B5016BB5E9C0063EEE9 /* Default.png */,
 				F1C81B5216BB5E9C0063EEE9 /* Default@2x.png */,
@@ -182,9 +179,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1C81B4B16BB5E9C0063EEE9 /* main.m in Sources */,
-				F1C81B4F16BB5E9C0063EEE9 /* AppDelegate.m in Sources */,
-				F1C81B5816BB5E9C0063EEE9 /* ViewController.m in Sources */,
+				F1C81B4B16BB5E9C0063EEE9 /* main.mm in Sources */,
+				F1C81B4F16BB5E9C0063EEE9 /* AppDelegate.mm in Sources */,
 				F1C81B6616BB5EC90063EEE9 /* GLView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

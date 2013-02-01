@@ -5,8 +5,10 @@
 //  Created by Mark Jones on 1/31/13.
 //  Copyright (c) 2013 Mark Jones. All rights reserved.
 //
-
+#import <OpenGLES/EAGLDrawable.h>
 #import "GLView.h"
+#import "mach/mach_time.h"
+#import <OpenGLES/ES2/gl.h>
 
 @implementation GLView
 
@@ -15,12 +17,23 @@
     return [CAEAGLLayer class];
 }
 
-- (void)drawView
+- (void)didRotate:(NSNotification *)notification
 {
-    glClearColor(0.5f, 0.5f, 0.5f, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    _renderingEngine->OnRotate((DeviceOrientation)orientation);
+    [self drawView:nil];
+}
+
+- (void)drawView:(CADisplayLink *)displayLink
+{
+    if (displayLink != nil) {
+        float elapsedSeconds = displayLink.timestamp - _timestamp;
+        _timestamp = displayLink.timestamp;
+        _renderingEngine->UpdateAnimation(elapsedSeconds);
+    }
     
-    [self.context presentRenderbuffer:GL_RENDERBUFFER_OES];
+    _renderingEngine->Render();
+    [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -36,30 +49,47 @@
             return nil;
         }
         
-        GLuint frameBuffer;
-        GLuint renderBuffer;
+        _renderingEngine = CreateRenderer1();
+        
+        
+//        GLuint frameBuffer;
+//        GLuint renderBuffer;
 
-        glGenFramebuffersOES(1, &frameBuffer);
-        glGenRenderbuffersOES(1, &renderBuffer);
+//        glGenFramebuffersOES(1, &frameBuffer);
+//        glGenRenderbuffersOES(1, &renderBuffer);
+//
+//        glBindFramebufferOES(GL_FRAMEBUFFER_OES, frameBuffer);
+//        glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderBuffer);
+        
+        [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:eaglLayer];
+        
+        
+//        glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, renderBuffer);
 
-        glBindFramebufferOES(GL_FRAMEBUFFER_OES, frameBuffer);
-        glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderBuffer);
+        _renderingEngine->Initialize(CGRectGetWidth(frame), CGRectGetHeight(frame));
+        
+//        
+//        glViewport(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));
 
-        [_context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:eaglLayer];
-        glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, renderBuffer);
+        [self drawView:nil];
 
-        glViewport(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));
-
-        [self drawView];
+        _timestamp = CACurrentMediaTime();
+        
+        CADisplayLink *displayLink;
+        displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawView:)];
+        [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
     return self;
 }
 
-- (void)dealloc
-{
-    if ([EAGLContext currentContext] == self.context) {
-        [EAGLContext setCurrentContext:nil];
-    }
-}
+//- (void)dealloc
+//{
+//    if ([EAGLContext currentContext] == self.context) {
+//        [EAGLContext setCurrentContext:nil];
+//    }
+//}
 
 @end
