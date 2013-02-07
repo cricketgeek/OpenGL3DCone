@@ -12,6 +12,8 @@
 
 @implementation GLView
 
+const bool ForceES1 = false;
+
 + (Class)layerClass
 {
     return [CAEAGLLayer class];
@@ -43,34 +45,35 @@
         CAEAGLLayer *eaglLayer = (CAEAGLLayer*)super.layer;
         eaglLayer.opaque = YES;
         
-        _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+        EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES2;
+        _context = [[EAGLContext alloc] initWithAPI:api];
+        
+        //_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+ 
+        if (!_context || ForceES1) {
+            api = kEAGLRenderingAPIOpenGLES1;
+        }
+        
         
         if (!_context || ![EAGLContext setCurrentContext:_context]) {
             return nil;
         }
         
-        _renderingEngine = CreateRenderer1();
+ 
+        if (api == kEAGLRenderingAPIOpenGLES1) {
+            _renderingEngine = CreateRenderer1();
+        }
+        else
+        {
+            NSLog(@"using openGL ES 2.0");
+            _renderingEngine = CreateRenderer2();
+        }
         
-        
-//        GLuint frameBuffer;
-//        GLuint renderBuffer;
-
-//        glGenFramebuffersOES(1, &frameBuffer);
-//        glGenRenderbuffersOES(1, &renderBuffer);
-//
-//        glBindFramebufferOES(GL_FRAMEBUFFER_OES, frameBuffer);
-//        glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderBuffer);
+//        _renderingEngine = CreateRenderer1();
         
         [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:eaglLayer];
-        
-        
-//        glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, renderBuffer);
-
         _renderingEngine->Initialize(CGRectGetWidth(frame), CGRectGetHeight(frame));
         
-//        
-//        glViewport(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));
-
         [self drawView:nil];
 
         _timestamp = CACurrentMediaTime();
@@ -85,11 +88,5 @@
     return self;
 }
 
-//- (void)dealloc
-//{
-//    if ([EAGLContext currentContext] == self.context) {
-//        [EAGLContext setCurrentContext:nil];
-//    }
-//}
 
 @end
