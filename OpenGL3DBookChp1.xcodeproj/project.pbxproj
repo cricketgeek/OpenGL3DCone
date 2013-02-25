@@ -26,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F1C4594A16DAE51D001E0698 /* Quaternion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Quaternion.hpp; sourceTree = "<group>"; };
+		F1C4594B16DAE51D001E0698 /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
+		F1C4594C16DAE51D001E0698 /* Vector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vector.hpp; sourceTree = "<group>"; };
 		F1C81B3A16BB5E9C0063EEE9 /* OpenGL3DBookChp1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGL3DBookChp1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1C81B3E16BB5E9C0063EEE9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F1C81B4016BB5E9C0063EEE9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -98,6 +101,9 @@
 		F1C81B4416BB5E9C0063EEE9 /* OpenGL3DBookChp1 */ = {
 			isa = PBXGroup;
 			children = (
+				F1C4594A16DAE51D001E0698 /* Quaternion.hpp */,
+				F1C4594B16DAE51D001E0698 /* Matrix.hpp */,
+				F1C4594C16DAE51D001E0698 /* Vector.hpp */,
 				F1DB033E16BD92180023CA6E /* Shaders */,
 				F1C81B4D16BB5E9C0063EEE9 /* AppDelegate.h */,
 				F1C81B4E16BB5E9C0063EEE9 /* AppDelegate.mm */,
