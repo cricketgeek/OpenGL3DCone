@@ -1,92 +1,87 @@
-//
-//  GLView.m
-//  OpenGL3DBookChp1
-//
-//  Created by Mark Jones on 1/31/13.
-//  Copyright (c) 2013 Mark Jones. All rights reserved.
-//
-#import <OpenGLES/EAGLDrawable.h>
 #import "GLView.h"
-#import "mach/mach_time.h"
-#import <OpenGLES/ES2/gl.h>
+
+#define GL_RENDERBUFFER 0x8d41
 
 @implementation GLView
 
-const bool ForceES1 = true;
+const bool ForceES1 = false;
 
-+ (Class)layerClass
++ (Class) layerClass
 {
     return [CAEAGLLayer class];
 }
 
-- (void)didRotate:(NSNotification *)notification
+- (id) initWithFrame: (CGRect) frame
 {
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-    _renderingEngine->OnRotate((DeviceOrientation)orientation);
-    [self drawView:nil];
-}
-
-- (void)drawView:(CADisplayLink *)displayLink
-{
-    if (displayLink != nil) {
-        float elapsedSeconds = displayLink.timestamp - _timestamp;
-        _timestamp = displayLink.timestamp;
-        _renderingEngine->UpdateAnimation(elapsedSeconds);
-    }
-    
-    _renderingEngine->Render();
-    [_context presentRenderbuffer:GL_RENDERBUFFER];
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        CAEAGLLayer *eaglLayer = (CAEAGLLayer*)super.layer;
+    if (self = [super initWithFrame:frame]) {
+        CAEAGLLayer* eaglLayer = (CAEAGLLayer*) super.layer;
         eaglLayer.opaque = YES;
         
         EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES2;
-        _context = [[EAGLContext alloc] initWithAPI:api];
+        m_context = [[EAGLContext alloc] initWithAPI:api];
         
-        //_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
- 
-        if (!_context || ForceES1) {
+        if (!m_context) {
             api = kEAGLRenderingAPIOpenGLES1;
+            m_context = [[EAGLContext alloc] initWithAPI:api];
         }
         
-        
-        if (!_context || ![EAGLContext setCurrentContext:_context]) {
+        if (!m_context || ![EAGLContext setCurrentContext:m_context]) {
+
             return nil;
         }
         
- 
         if (api == kEAGLRenderingAPIOpenGLES1) {
-            _renderingEngine = CreateRenderer1();
+            NSLog(@"Using OpenGL ES 1.1");
+            m_renderingEngine = CreateRenderer1();
+        } else {
+            NSLog(@"Using OpenGL ES 2.0");
+            m_renderingEngine = CreateRenderer2();
         }
-        else
-        {
-            NSLog(@"using openGL ES 2.0");
-            _renderingEngine = CreateRenderer2();
-        }
         
-//        _renderingEngine = CreateRenderer1();
+        [m_context
+         renderbufferStorage:GL_RENDERBUFFER
+         fromDrawable: eaglLayer];
         
-        [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:eaglLayer];
-        _renderingEngine->Initialize(CGRectGetWidth(frame), CGRectGetHeight(frame));
+        m_renderingEngine->Initialize(CGRectGetWidth(frame), CGRectGetHeight(frame));
         
-        [self drawView:nil];
-
-        _timestamp = CACurrentMediaTime();
+        [self drawView: nil];
+        m_timestamp = CACurrentMediaTime();
         
-        CADisplayLink *displayLink;
-        displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawView:)];
-        [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        CADisplayLink* displayLink;
+        displayLink = [CADisplayLink displayLinkWithTarget:self
+                                                  selector:@selector(drawView:)];
+        
+        [displayLink addToRunLoop:[NSRunLoop currentRunLoop]
+                          forMode:NSDefaultRunLoopMode];
+        
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(didRotate:)
+         name:UIDeviceOrientationDidChangeNotification
+         object:nil];
     }
     return self;
 }
 
+- (void) didRotate: (NSNotification*) notification
+{
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    m_renderingEngine->OnRotate((DeviceOrientation) orientation);
+    [self drawView: nil];
+}
+
+- (void) drawView: (CADisplayLink*) displayLink
+{
+    if (displayLink != nil) {
+        float elapsedSeconds = displayLink.timestamp - m_timestamp;
+        m_timestamp = displayLink.timestamp;
+        m_renderingEngine->UpdateAnimation(elapsedSeconds);
+    }
+    
+    m_renderingEngine->Render();
+    [m_context presentRenderbuffer:GL_RENDERBUFFER];
+}
 
 @end

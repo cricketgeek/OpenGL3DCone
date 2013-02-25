@@ -1,26 +1,14 @@
-//
-//  GLView.h
-//  OpenGL3DBookChp1
-//
-//  Created by Mark Jones on 1/31/13.
-//  Copyright (c) 2013 Mark Jones. All rights reserved.
-//
-
-#import <UIKit/UIKit.h>
-#import <OpenGLES/EAGL.h>
-#import <QuartzCore/QuartzCore.h>
 #import "IRenderingEngine.hpp"
+#import <QuartzCore/QuartzCore.h>
 
-@interface GLView : UIView
-{
+@interface GLView : UIView {
 @private
-    EAGLContext *_context;
-    IRenderingEngine *_renderingEngine;
-    float _timestamp;
+    EAGLContext* m_context;
+    IRenderingEngine* m_renderingEngine;
+    float m_timestamp;
 }
 
-- (void)drawView:(CADisplayLink *)displayLink;
-- (void)didRotate:(NSNotification *)notification;
-
+- (void) drawView: (CADisplayLink*) displayLink;
+- (void) didRotate: (NSNotification*) notification;
 
 @end
